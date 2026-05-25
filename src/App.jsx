@@ -51,6 +51,7 @@ function Stopwatch() {
   const [seconds, setSeconds] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
   const [laps, setLaps] = useState([])
+  const [showHelp, setShowHelp] = useState(false)
 
   useEffect(() => {
     if (!isRunning) return
@@ -190,10 +191,61 @@ function Stopwatch() {
 
       </div>
 
-      <div className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-4 text-sm text-zinc-500 space-y-1">
-        <p>SPACE  Start / Pause</p>
-        <p>R  Reset</p>
-        <p>L  Save Session</p>
+      <div className="w-full">
+
+        <button
+          onClick={() => setShowHelp((prev) => !prev)}
+          className="w-full flex items-center justify-between bg-zinc-950 border border-zinc-800 hover:border-green-500 rounded-xl px-4 py-3 transition-all"
+        >
+          <span className="font-semibold text-zinc-300">
+            Help & Shortcuts
+          </span>
+
+          <span className="text-green-400 text-xl">
+            {showHelp ? "−" : "+"}
+          </span>
+        </button>
+
+        {showHelp && (
+          <div className="mt-3 bg-zinc-950 border border-zinc-800 rounded-xl p-4 animate-fadeIn">
+
+            <div className="space-y-3 text-sm">
+
+              <div className="flex items-center justify-between">
+                <span className="text-zinc-400">
+                  Start / Pause
+                </span>
+
+                <kbd className="bg-zinc-800 px-3 py-1 rounded-lg text-green-400 font-mono">
+                  SPACE
+                </kbd>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-zinc-400">
+                  Reset Timer
+                </span>
+
+                <kbd className="bg-zinc-800 px-3 py-1 rounded-lg text-green-400 font-mono">
+                  R
+                </kbd>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <span className="text-zinc-400">
+                  Save Session
+                </span>
+
+                <kbd className="bg-zinc-800 px-3 py-1 rounded-lg text-green-400 font-mono">
+                  S
+                </kbd>
+              </div>
+
+            </div>
+
+          </div>
+        )}
+
       </div>
 
     </div>
