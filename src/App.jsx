@@ -307,6 +307,10 @@ function Timer() {
     minutes % 60
   ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
 
+  const addExtraTime = (minutesToAdd) => {
+    setSecondsLeft((prev) => prev + minutesToAdd * 60)
+  }
+
   return (
     <div className="flex flex-col items-center gap-5">
 
@@ -337,6 +341,7 @@ function Timer() {
             Start Focus Timer
           </button>
 
+
           <div className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-4 text-sm text-zinc-500">
             Recommended:
             <br />
@@ -346,51 +351,84 @@ function Timer() {
           </div>
 
         </>
-      ) : (
-        <>
+      ) : <>
+        <p className="text-6xl font-mono font-bold tracking-widest text-green-400 text-center">
+          {display}
+        </p>
 
-          <p className="text-6xl font-mono font-bold tracking-widest text-green-400">
-            {display}
-          </p>
-
-          <p
-            className={`text-sm font-semibold tracking-wide ${
-              isDone
-                ? "text-green-400"
-                : isRunning
+        <p
+          className={`text-sm font-semibold tracking-wide ${isDone
+              ? "text-green-400"
+              : isRunning
                 ? "text-green-300"
                 : "text-zinc-500"
             }`}
-          >
-            {isDone
-              ? "SESSION COMPLETE"
-              : isRunning
+        >
+          {isDone
+            ? "SESSION COMPLETE"
+            : isRunning
               ? "DEEP WORK ACTIVE"
               : "PAUSED"}
-          </p>
+        </p>
 
-          <div className="grid grid-cols-2 gap-3 w-full">
+        {/* Main Buttons */}
+        <div className="grid grid-cols-2 gap-3 w-full">
 
+          <button
+            onClick={handleReset}
+            className="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-all font-semibold border border-zinc-700"
+          >
+            Reset
+          </button>
+
+          {!isDone && (
             <button
-              onClick={handleReset}
-              className="py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-all font-semibold"
+              onClick={handlePauseResume}
+              className="w-full py-3 rounded-xl bg-green-500 hover:bg-green-400 text-black transition-all font-bold"
             >
-              Reset
+              {isRunning ? "Pause" : "Resume"}
             </button>
+          )}
 
-            {!isDone && (
+        </div>
+
+        {/* Extra Time Section */}
+        {!isDone && (
+          <div className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4">
+
+            <p className="text-zinc-400 text-sm mb-4 text-center font-medium">
+              Add Extra Focus Time
+            </p>
+
+            <div className="grid grid-cols-3 gap-3">
+
               <button
-                onClick={handlePauseResume}
-                className="py-3 rounded-xl bg-green-500 hover:bg-green-400 text-black transition-all font-bold"
+                onClick={() => addExtraTime(5)}
+                className="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 transition-all font-semibold"
               >
-                {isRunning ? "Pause" : "Resume"}
+                +5 Min
               </button>
-            )}
+
+              <button
+                onClick={() => addExtraTime(10)}
+                className="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 transition-all font-semibold"
+              >
+                +10 Min
+              </button>
+
+              <button
+                onClick={() => addExtraTime(15)}
+                className="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 transition-all font-semibold"
+              >
+                +15 Min
+              </button>
+
+            </div>
 
           </div>
-
-        </>
-      )}
+        )}
+      </>
+      }
 
     </div>
   )
