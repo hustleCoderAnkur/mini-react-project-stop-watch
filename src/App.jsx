@@ -191,9 +191,9 @@ function Stopwatch() {
       </div>
 
       <div className="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-4 text-sm text-zinc-500 space-y-1">
-        <p>SPACE → Start / Pause</p>
-        <p>R → Reset</p>
-        <p>L → Save Session</p>
+        <p>SPACE  Start / Pause</p>
+        <p>R  Reset</p>
+        <p>L  Save Session</p>
       </div>
 
     </div>
