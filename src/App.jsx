@@ -125,7 +125,7 @@ function Stopwatch({ bgMode }) {
   const seconds = Math.floor((time % 60000) / 1000)
   const milliseconds = Math.floor((time % 1000) / 10)
 
-  const display = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${String(milliseconds).padStart(2, "0")}`
+  const display = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}:${String(milliseconds).padStart(2, "0")}`
 
   const handleStartStop = () => {
     if (isRunning) {
